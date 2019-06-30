@@ -1,0 +1,27 @@
+
+------------------------------------- Proof -------------------------------------
+
+/IF	S0= PC[NIA]=addr                                            Premise(F1)
+
+IF	S1= CtrlPC=0                                                Premise(F5510)
+	S2= CtrlPCInc=1                                             Premise(F5511)
+	S3= PC[NIA]=addr+4                                          PC-Write(S0,S1,S2)
+
+ID	S4= CtrlPC=0                                                Premise(F11130)
+	S5= CtrlPCInc=0                                             Premise(F11131)
+	S6= PC[NIA]=addr+4                                          PC-Hold(S3,S4,S5)
+
+EX	S7= CtrlPC=0                                                Premise(F16750)
+	S8= CtrlPCInc=0                                             Premise(F16751)
+	S9= PC[NIA]=addr+4                                          PC-Hold(S6,S7,S8)
+
+MEM	S10= CtrlPC=0                                               Premise(F22370)
+	S11= CtrlPCInc=0                                            Premise(F22371)
+	S12= PC[NIA]=addr+4                                         PC-Hold(S9,S10,S11)
+
+WB	S13= CtrlPC=0                                               Premise(F27990)
+	S14= CtrlPCInc=0                                            Premise(F27991)
+	S15= PC[NIA]=addr+4                                         PC-Hold(S12,S13,S14)
+
+WB/	S15= PC[NIA]=addr+4                                         PC-Hold(S12,S13,S14)
+

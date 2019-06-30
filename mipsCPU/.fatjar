@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Sep 18 10:27:51 GMT+08:00 2015
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=mipsCPUGen_new_v10_fat.jar
+manifest.mergeall=true
+manifest.mainclass=mipsCPUGen_new_v10.MIPSCPU_v10
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

@@ -1,0 +1,116 @@
+
+---------------------------------- Formula Set ----------------------------------
+
+PRE	F0= [PIDReg]=pid
+	F1= PC[Out]=addr
+	F2= IMem[{pid,addr}]={31,rT,rA,0,208}
+	F3= GPRegs[rA]=a
+
+IF	F4= PIDReg.Out=>IMem.PID
+	F5= PC.NIA=>IMem.Addr
+	F6= IMem.RData=>IR.In
+	F7= IR.Out0_5=>CU.Op
+	F8= IR.Out11_15=>GPRegs.RReg1
+	F9= IR.Out21_31=>CU.IRFunc
+	F10= GPRegs.RData1=>A.In
+	F11= A.Out=>ALU.A
+	F12= CU.Func=>ALU.Func
+	F13= ALU.Out=>ALUOut.In
+	F14= IR.Out6_10=>GPRegs.WReg
+	F15= ALUOut.Out=>GPRegs.WData
+	F16= CtrlPIDReg=0
+	F17= CtrlIMem=0
+	F18= CtrlPC=0
+	F19= CtrlPCInc=1
+	F20= CtrlIR=1
+	F21= CtrlGPRegs=0
+	F22= CtrlA=0
+	F23= CtrlALUOut=0
+
+ID	F24= PIDReg.Out=>IMem.PID
+	F25= PC.NIA=>IMem.Addr
+	F26= IMem.RData=>IR.In
+	F27= IR.Out0_5=>CU.Op
+	F28= IR.Out11_15=>GPRegs.RReg1
+	F29= IR.Out21_31=>CU.IRFunc
+	F30= GPRegs.RData1=>A.In
+	F31= A.Out=>ALU.A
+	F32= CU.Func=>ALU.Func
+	F33= ALU.Out=>ALUOut.In
+	F34= IR.Out6_10=>GPRegs.WReg
+	F35= ALUOut.Out=>GPRegs.WData
+	F36= CtrlPIDReg=0
+	F37= CtrlIMem=0
+	F38= CtrlPC=0
+	F39= CtrlPCInc=0
+	F40= CtrlIR=0
+	F41= CtrlGPRegs=0
+	F42= CtrlA=1
+	F43= CtrlALUOut=0
+
+EX	F44= PIDReg.Out=>IMem.PID
+	F45= PC.NIA=>IMem.Addr
+	F46= IMem.RData=>IR.In
+	F47= IR.Out0_5=>CU.Op
+	F48= IR.Out11_15=>GPRegs.RReg1
+	F49= IR.Out21_31=>CU.IRFunc
+	F50= GPRegs.RData1=>A.In
+	F51= A.Out=>ALU.A
+	F52= CU.Func=>ALU.Func
+	F53= ALU.Out=>ALUOut.In
+	F54= IR.Out6_10=>GPRegs.WReg
+	F55= ALUOut.Out=>GPRegs.WData
+	F56= CtrlPIDReg=0
+	F57= CtrlIMem=0
+	F58= CtrlPC=0
+	F59= CtrlPCInc=0
+	F60= CtrlIR=0
+	F61= CtrlGPRegs=0
+	F62= CtrlA=0
+	F63= CtrlALUOut=1
+
+MEM	F64= PIDReg.Out=>IMem.PID
+	F65= PC.NIA=>IMem.Addr
+	F66= IMem.RData=>IR.In
+	F67= IR.Out0_5=>CU.Op
+	F68= IR.Out11_15=>GPRegs.RReg1
+	F69= IR.Out21_31=>CU.IRFunc
+	F70= GPRegs.RData1=>A.In
+	F71= A.Out=>ALU.A
+	F72= CU.Func=>ALU.Func
+	F73= ALU.Out=>ALUOut.In
+	F74= IR.Out6_10=>GPRegs.WReg
+	F75= ALUOut.Out=>GPRegs.WData
+	F76= CtrlPIDReg=0
+	F77= CtrlIMem=0
+	F78= CtrlPC=0
+	F79= CtrlPCInc=0
+	F80= CtrlIR=0
+	F81= CtrlGPRegs=0
+	F82= CtrlA=0
+	F83= CtrlALUOut=0
+
+WB	F84= PIDReg.Out=>IMem.PID
+	F85= PC.NIA=>IMem.Addr
+	F86= IMem.RData=>IR.In
+	F87= IR.Out0_5=>CU.Op
+	F88= IR.Out11_15=>GPRegs.RReg1
+	F89= IR.Out21_31=>CU.IRFunc
+	F90= GPRegs.RData1=>A.In
+	F91= A.Out=>ALU.A
+	F92= CU.Func=>ALU.Func
+	F93= ALU.Out=>ALUOut.In
+	F94= IR.Out6_10=>GPRegs.WReg
+	F95= ALUOut.Out=>GPRegs.WData
+	F96= CtrlPIDReg=0
+	F97= CtrlIMem=0
+	F98= CtrlPC=0
+	F99= CtrlPCInc=0
+	F100= CtrlIR=0
+	F101= CtrlGPRegs=1
+	F102= CtrlA=0
+	F103= CtrlALUOut=0
+
+POST	F104= PC[Out]=addr+4
+	F105= GPRegs[rT]=(-a)
+

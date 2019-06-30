@@ -1,0 +1,46 @@
+
+------------------------------------- Proof -------------------------------------
+
+PRE	S0= CP0[ASID]=pid                                           Premise(F0)
+	S1= PC[Out]=addr                                            Premise(F1)
+	S2= IMem[{pid,addr}]={0,rS,0,0,hint,8}                      Premise(F2)
+	S3= GPR[rS]=a                                               Premise(F3)
+
+IF	S4= CP0.ASID=pid                                            ASID-Read(S0)
+	S5= PC.Out=addr                                             PC-Out(S1)
+	S6= PC.Out=>IMem.RAddr                                      Premise(F4)
+	S7= IMem.RAddr=addr                                         Path(S5,S6)
+	S8= CP0.ASID=>IMem.ASID                                     Premise(F5)
+	S9= IMem.ASID=pid                                           Path(S4,S8)
+	S10= IMem.Out={0,rS,0,0,hint,8}                             IMem-Read(S9,S7,S2)
+	S11= IMem.Out=>IR.In                                        Premise(F6)
+	S12= IR.In={0,rS,0,0,hint,8}                                Path(S10,S11)
+	S13= CtrlIR=1                                               Premise(F18)
+	S14= [IR]={0,rS,0,0,hint,8}                                 IR-Write(S12,S13)
+	S15= CtrlGPR=0                                              Premise(F19)
+	S16= GPR[rS]=a                                              GPR-Hold(S3,S15)
+
+ID	S17= IR.Out25_21=rS                                         IR-Out(S14)
+	S18= IR.Out25_21=>GPR.RReg1                                 Premise(F24)
+	S19= GPR.RReg1=rS                                           Path(S17,S18)
+	S20= GPR.Rdata1=a                                           GPR-Read(S19,S16)
+	S21= GPR.Rdata1=>PC.In                                      Premise(F26)
+	S22= PC.In=a                                                Path(S20,S21)
+	S23= CtrlPC=1                                               Premise(F27)
+	S24= CtrlPCInc=0                                            Premise(F28)
+	S25= PC[Out]=a                                              PC-Write(S22,S23,S24)
+
+EX	S26= CtrlPC=0                                               Premise(F43)
+	S27= CtrlPCInc=0                                            Premise(F44)
+	S28= PC[Out]=a                                              PC-Hold(S25,S26,S27)
+
+MEM	S29= CtrlPC=0                                               Premise(F59)
+	S30= CtrlPCInc=0                                            Premise(F60)
+	S31= PC[Out]=a                                              PC-Hold(S28,S29,S30)
+
+WB	S32= CtrlPC=0                                               Premise(F75)
+	S33= CtrlPCInc=0                                            Premise(F76)
+	S34= PC[Out]=a                                              PC-Hold(S31,S32,S33)
+
+POST	S34= PC[Out]=a                                              PC-Hold(S31,S32,S33)
+

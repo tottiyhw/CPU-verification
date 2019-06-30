@@ -1,0 +1,58 @@
+
+------------------------------------- Proof -------------------------------------
+
+PRE	S0= CP0[ASID]=pid                                           Premise(F0)
+	S1= PC[Out]=addr                                            Premise(F1)
+	S2= IMem[{pid,addr}]={0,rS,cc,0,1,rD,0,1}                   Premise(F2)
+
+IF	S3= CP0.ASID=pid                                            ASID-Read(S0)
+	S4= PC.Out=addr                                             PC-Out(S1)
+	S5= PC.Out=>IMem.RAddr                                      Premise(F4)
+	S6= IMem.RAddr=addr                                         Path(S4,S5)
+	S7= CP0.ASID=>IMem.ASID                                     Premise(F5)
+	S8= IMem.ASID=pid                                           Path(S3,S7)
+	S9= IMem.Out={0,rS,cc,0,1,rD,0,1}                           IMem-Read(S8,S6,S2)
+	S10= IMem.Out=>IR.In                                        Premise(F6)
+	S11= IR.In={0,rS,cc,0,1,rD,0,1}                             Path(S9,S10)
+	S12= CtrlPC=0                                               Premise(F17)
+	S13= CtrlPCInc=1                                            Premise(F18)
+	S14= PC[Out]=addr+4                                         PC-Inc(S1,S12,S13)
+	S15= CtrlIR=1                                               Premise(F24)
+	S16= [IR]={0,rS,cc,0,1,rD,0,1}                              IR-Write(S11,S15)
+
+ID	S17= CtrlPC=0                                               Premise(F42)
+	S18= CtrlPCInc=0                                            Premise(F43)
+	S19= PC[Out]=addr+4                                         PC-Hold(S14,S17,S18)
+	S20= CtrlIR=0                                               Premise(F49)
+	S21= [IR]={0,rS,cc,0,1,rD,0,1}                              IR-Hold(S16,S20)
+
+EX	S22= IR.Out20_18=cc                                         IR-Out(S21)
+	S23= IR.Out16=1                                             IR-Out(S21)
+	S24= IR.Out20_18=>CP1.cc                                    Premise(F61)
+	S25= CP1.cc=cc                                              Path(S22,S24)
+	S26= IR.Out16=>CP1.tf                                       Premise(F62)
+	S27= CP1.tf=1                                               Path(S23,S26)
+	S28= CP1.fp=FPConditionCode(cc,1)                           FP-PRODUCT(S25,S27)
+	S29= CP1.fp=>ConditionReg.In                                Premise(F63)
+	S30= ConditionReg.In=FPConditionCode(cc,1)                  Path(S28,S29)
+	S31= CtrlPC=0                                               Premise(F67)
+	S32= CtrlPCInc=0                                            Premise(F68)
+	S33= PC[Out]=addr+4                                         PC-Hold(S19,S31,S32)
+	S34= CtrlConditionReg=1                                     Premise(F78)
+	S35= [ConditionReg]=FPConditionCode(cc,1)                   ConditionReg-Write(S30,S34)
+
+MEM	S36= CtrlPC=0                                               Premise(F92)
+	S37= CtrlPCInc=0                                            Premise(F93)
+	S38= PC[Out]=addr+4                                         PC-Hold(S33,S36,S37)
+	S39= CtrlConditionReg=0                                     Premise(F103)
+	S40= [ConditionReg]=FPConditionCode(cc,1)                   ConditionReg-Hold(S35,S39)
+
+WB	S41= CtrlPC=0                                               Premise(F117)
+	S42= CtrlPCInc=0                                            Premise(F118)
+	S43= PC[Out]=addr+4                                         PC-Hold(S38,S41,S42)
+	S44= CtrlConditionReg=0                                     Premise(F128)
+	S45= [ConditionReg]=FPConditionCode(cc,1)                   ConditionReg-Hold(S40,S44)
+
+POST	S43= PC[Out]=addr+4                                         PC-Hold(S38,S41,S42)
+	S45= [ConditionReg]=FPConditionCode(cc,1)                   ConditionReg-Hold(S40,S44)
+

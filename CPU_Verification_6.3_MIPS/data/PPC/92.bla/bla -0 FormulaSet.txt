@@ -1,0 +1,90 @@
+
+---------------------------------- Formula Set ----------------------------------
+
+PRE	F0= [PIDReg]=pid
+	F1= PC[Out]=addr
+	F2= IMem[{pid,addr}]={18,LI,1,1}
+
+IF	F3= PIDReg.Out=>IMem.PID
+	F4= PC.NIA=>IMem.Addr
+	F5= IMem.RData=>IR.In
+	F6= IR.Out0_5=>CU.Op
+	F7= IR.Out6_29=>Addr24Ext.In
+	F8= IR.Out30=>CU.AA
+	F9= IR.Out31=>CU.LK
+	F10= Addr24Ext.Out=>PC.In
+	F11= PC.NIA=>LR.In
+	F12= CtrlPIDReg=0
+	F13= CtrlIMem=0
+	F14= CtrlPC=0
+	F15= CtrlPCInc=1
+	F16= CtrlIR=1
+	F17= CtrlLR=0
+
+ID	F18= PIDReg.Out=>IMem.PID
+	F19= PC.NIA=>IMem.Addr
+	F20= IMem.RData=>IR.In
+	F21= IR.Out0_5=>CU.Op
+	F22= IR.Out6_29=>Addr24Ext.In
+	F23= IR.Out30=>CU.AA
+	F24= IR.Out31=>CU.LK
+	F25= Addr24Ext.Out=>PC.In
+	F26= PC.NIA=>LR.In
+	F27= CtrlPIDReg=0
+	F28= CtrlIMem=0
+	F29= CtrlPC=1
+	F30= CtrlPCInc=0
+	F31= CtrlIR=0
+	F32= CtrlLR=1
+
+EX	F33= PIDReg.Out=>IMem.PID
+	F34= PC.NIA=>IMem.Addr
+	F35= IMem.RData=>IR.In
+	F36= IR.Out0_5=>CU.Op
+	F37= IR.Out6_29=>Addr24Ext.In
+	F38= IR.Out30=>CU.AA
+	F39= IR.Out31=>CU.LK
+	F40= Addr24Ext.Out=>PC.In
+	F41= PC.NIA=>LR.In
+	F42= CtrlPIDReg=0
+	F43= CtrlIMem=0
+	F44= CtrlPC=0
+	F45= CtrlPCInc=0
+	F46= CtrlIR=0
+	F47= CtrlLR=0
+
+MEM	F48= PIDReg.Out=>IMem.PID
+	F49= PC.NIA=>IMem.Addr
+	F50= IMem.RData=>IR.In
+	F51= IR.Out0_5=>CU.Op
+	F52= IR.Out6_29=>Addr24Ext.In
+	F53= IR.Out30=>CU.AA
+	F54= IR.Out31=>CU.LK
+	F55= Addr24Ext.Out=>PC.In
+	F56= PC.NIA=>LR.In
+	F57= CtrlPIDReg=0
+	F58= CtrlIMem=0
+	F59= CtrlPC=0
+	F60= CtrlPCInc=0
+	F61= CtrlIR=0
+	F62= CtrlLR=0
+
+WB	F63= PIDReg.Out=>IMem.PID
+	F64= PC.NIA=>IMem.Addr
+	F65= IMem.RData=>IR.In
+	F66= IR.Out0_5=>CU.Op
+	F67= IR.Out6_29=>Addr24Ext.In
+	F68= IR.Out30=>CU.AA
+	F69= IR.Out31=>CU.LK
+	F70= Addr24Ext.Out=>PC.In
+	F71= PC.NIA=>LR.In
+	F72= CtrlPIDReg=0
+	F73= CtrlIMem=0
+	F74= CtrlPC=0
+	F75= CtrlPCInc=0
+	F76= CtrlIR=0
+	F77= CtrlLR=0
+
+POST	F78= PC[Out]={8{LI[23]},LI}
+	F79= [LR]=addr+4
+

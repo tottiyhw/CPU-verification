@@ -1,0 +1,101 @@
+
+---------------------------------- Formula Set ----------------------------------
+
+PRE	F0= CP0[ASID]=pid
+	F1= PC[Out]=addr
+	F2= IMem[{pid,addr}]={0,rS,0,17}
+	F3= GPR[rS]=a
+
+IF	F4= PC.Out=>IMem.RAddr
+	F5= CP0.ASID=>IMem.ASID
+	F6= IMem.Out=>IR.In
+	F7= IR.Out31_26=>CU.Op
+	F8= IR.Out25_21=>GPR.RReg1
+	F9= IR.Out5_0=>CU.IRFunc
+	F10= GPR.Rdata1=>Hi.In
+	F11= CtrlPC=0
+	F12= CtrlPCInc=1
+	F13= CtrlIMem=0
+	F14= CtrlASIDIn=0
+	F15= CtrlCP0=0
+	F16= CtrlEPCIn=0
+	F17= CtrlExCodeIn=0
+	F18= CtrlIR=1
+	F19= CtrlGPR=0
+	F20= CtrlHi=0
+
+ID	F21= PC.Out=>IMem.RAddr
+	F22= CP0.ASID=>IMem.ASID
+	F23= IMem.Out=>IR.In
+	F24= IR.Out31_26=>CU.Op
+	F25= IR.Out25_21=>GPR.RReg1
+	F26= IR.Out5_0=>CU.IRFunc
+	F27= GPR.Rdata1=>Hi.In
+	F28= CtrlPC=0
+	F29= CtrlPCInc=0
+	F30= CtrlIMem=0
+	F31= CtrlASIDIn=0
+	F32= CtrlCP0=0
+	F33= CtrlEPCIn=0
+	F34= CtrlExCodeIn=0
+	F35= CtrlIR=0
+	F36= CtrlGPR=0
+	F37= CtrlHi=1
+
+EX	F38= PC.Out=>IMem.RAddr
+	F39= CP0.ASID=>IMem.ASID
+	F40= IMem.Out=>IR.In
+	F41= IR.Out31_26=>CU.Op
+	F42= IR.Out25_21=>GPR.RReg1
+	F43= IR.Out5_0=>CU.IRFunc
+	F44= GPR.Rdata1=>Hi.In
+	F45= CtrlPC=0
+	F46= CtrlPCInc=0
+	F47= CtrlIMem=0
+	F48= CtrlASIDIn=0
+	F49= CtrlCP0=0
+	F50= CtrlEPCIn=0
+	F51= CtrlExCodeIn=0
+	F52= CtrlIR=0
+	F53= CtrlGPR=0
+	F54= CtrlHi=0
+
+MEM	F55= PC.Out=>IMem.RAddr
+	F56= CP0.ASID=>IMem.ASID
+	F57= IMem.Out=>IR.In
+	F58= IR.Out31_26=>CU.Op
+	F59= IR.Out25_21=>GPR.RReg1
+	F60= IR.Out5_0=>CU.IRFunc
+	F61= GPR.Rdata1=>Hi.In
+	F62= CtrlPC=0
+	F63= CtrlPCInc=0
+	F64= CtrlIMem=0
+	F65= CtrlASIDIn=0
+	F66= CtrlCP0=0
+	F67= CtrlEPCIn=0
+	F68= CtrlExCodeIn=0
+	F69= CtrlIR=0
+	F70= CtrlGPR=0
+	F71= CtrlHi=0
+
+WB	F72= PC.Out=>IMem.RAddr
+	F73= CP0.ASID=>IMem.ASID
+	F74= IMem.Out=>IR.In
+	F75= IR.Out31_26=>CU.Op
+	F76= IR.Out25_21=>GPR.RReg1
+	F77= IR.Out5_0=>CU.IRFunc
+	F78= GPR.Rdata1=>Hi.In
+	F79= CtrlPC=0
+	F80= CtrlPCInc=0
+	F81= CtrlIMem=0
+	F82= CtrlASIDIn=0
+	F83= CtrlCP0=0
+	F84= CtrlEPCIn=0
+	F85= CtrlExCodeIn=0
+	F86= CtrlIR=0
+	F87= CtrlGPR=0
+	F88= CtrlHi=0
+
+POST	F89= PC[Out]=addr+4
+	F90= [Hi]=a
+

@@ -1,0 +1,89 @@
+
+---------------------------------- Formula Set ----------------------------------
+
+PRE	F0= CP0[ASID]=pid
+	F1= PC[Out]=addr
+	F2= IMem[{pid,addr}]={2,imm}
+
+IF	F3= PC.Out=>IMem.RAddr
+	F4= CP0.ASID=>IMem.ASID
+	F5= IMem.Out=>IR.In
+	F6= IR.Out31_26=>CU.Op
+	F7= PC.CIA31_28=>ADDREXT.PCpart
+	F8= IR.Out25_0=>ADDREXT.In
+	F9= ADDREXT.Out=>PC.In
+	F10= CtrlPC=0
+	F11= CtrlPCInc=1
+	F12= CtrlIMem=0
+	F13= CtrlASIDIn=0
+	F14= CtrlCP0=0
+	F15= CtrlEPCIn=0
+	F16= CtrlExCodeIn=0
+	F17= CtrlIR=1
+
+ID	F18= PC.Out=>IMem.RAddr
+	F19= CP0.ASID=>IMem.ASID
+	F20= IMem.Out=>IR.In
+	F21= IR.Out31_26=>CU.Op
+	F22= PC.CIA31_28=>ADDREXT.PCpart
+	F23= IR.Out25_0=>ADDREXT.In
+	F24= ADDREXT.Out=>PC.In
+	F25= CtrlPC=1
+	F26= CtrlPCInc=0
+	F27= CtrlIMem=0
+	F28= CtrlASIDIn=0
+	F29= CtrlCP0=0
+	F30= CtrlEPCIn=0
+	F31= CtrlExCodeIn=0
+	F32= CtrlIR=0
+
+EX	F33= PC.Out=>IMem.RAddr
+	F34= CP0.ASID=>IMem.ASID
+	F35= IMem.Out=>IR.In
+	F36= IR.Out31_26=>CU.Op
+	F37= PC.CIA31_28=>ADDREXT.PCpart
+	F38= IR.Out25_0=>ADDREXT.In
+	F39= ADDREXT.Out=>PC.In
+	F40= CtrlPC=0
+	F41= CtrlPCInc=0
+	F42= CtrlIMem=0
+	F43= CtrlASIDIn=0
+	F44= CtrlCP0=0
+	F45= CtrlEPCIn=0
+	F46= CtrlExCodeIn=0
+	F47= CtrlIR=0
+
+MEM	F48= PC.Out=>IMem.RAddr
+	F49= CP0.ASID=>IMem.ASID
+	F50= IMem.Out=>IR.In
+	F51= IR.Out31_26=>CU.Op
+	F52= PC.CIA31_28=>ADDREXT.PCpart
+	F53= IR.Out25_0=>ADDREXT.In
+	F54= ADDREXT.Out=>PC.In
+	F55= CtrlPC=0
+	F56= CtrlPCInc=0
+	F57= CtrlIMem=0
+	F58= CtrlASIDIn=0
+	F59= CtrlCP0=0
+	F60= CtrlEPCIn=0
+	F61= CtrlExCodeIn=0
+	F62= CtrlIR=0
+
+WB	F63= PC.Out=>IMem.RAddr
+	F64= CP0.ASID=>IMem.ASID
+	F65= IMem.Out=>IR.In
+	F66= IR.Out31_26=>CU.Op
+	F67= PC.CIA31_28=>ADDREXT.PCpart
+	F68= IR.Out25_0=>ADDREXT.In
+	F69= ADDREXT.Out=>PC.In
+	F70= CtrlPC=0
+	F71= CtrlPCInc=0
+	F72= CtrlIMem=0
+	F73= CtrlASIDIn=0
+	F74= CtrlCP0=0
+	F75= CtrlEPCIn=0
+	F76= CtrlExCodeIn=0
+	F77= CtrlIR=0
+
+POST	F78= PC[Out]={addr[31:28],imm,2'b0}
+

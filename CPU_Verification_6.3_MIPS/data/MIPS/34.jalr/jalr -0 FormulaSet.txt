@@ -1,0 +1,106 @@
+
+---------------------------------- Formula Set ----------------------------------
+
+PRE	F0= CP0[ASID]=pid
+	F1= PC[Out]=addr
+	F2= IMem[{pid,addr}]={0,rS,0,rD,hint,9}
+	F3= GPR[rS]=a
+
+IF	F4= PC.Out=>IMem.RAddr
+	F5= CP0.ASID=>IMem.ASID
+	F6= IMem.Out=>IR.In
+	F7= IR.Out31_26=>CU.Op
+	F8= IR.Out5_0=>CU.IRFunc
+	F9= IR.Out15_11=>GPR.WReg
+	F10= PC.Out=>GPR.WData
+	F11= IR.Out25_21=>GPR.RReg1
+	F12= GPR.Rdata1=>PC.In
+	F13= CtrlPC=0
+	F14= CtrlPCInc=1
+	F15= CtrlIMem=0
+	F16= CtrlASIDIn=0
+	F17= CtrlCP0=0
+	F18= CtrlEPCIn=0
+	F19= CtrlExCodeIn=0
+	F20= CtrlIR=1
+	F21= CtrlGPR=0
+
+ID	F22= PC.Out=>IMem.RAddr
+	F23= CP0.ASID=>IMem.ASID
+	F24= IMem.Out=>IR.In
+	F25= IR.Out31_26=>CU.Op
+	F26= IR.Out5_0=>CU.IRFunc
+	F27= IR.Out15_11=>GPR.WReg
+	F28= PC.Out=>GPR.WData
+	F29= IR.Out25_21=>GPR.RReg1
+	F30= GPR.Rdata1=>PC.In
+	F31= CtrlPC=1
+	F32= CtrlPCInc=0
+	F33= CtrlIMem=0
+	F34= CtrlASIDIn=0
+	F35= CtrlCP0=0
+	F36= CtrlEPCIn=0
+	F37= CtrlExCodeIn=0
+	F38= CtrlIR=0
+	F39= CtrlGPR=1
+
+EX	F40= PC.Out=>IMem.RAddr
+	F41= CP0.ASID=>IMem.ASID
+	F42= IMem.Out=>IR.In
+	F43= IR.Out31_26=>CU.Op
+	F44= IR.Out5_0=>CU.IRFunc
+	F45= IR.Out15_11=>GPR.WReg
+	F46= PC.Out=>GPR.WData
+	F47= IR.Out25_21=>GPR.RReg1
+	F48= GPR.Rdata1=>PC.In
+	F49= CtrlPC=0
+	F50= CtrlPCInc=0
+	F51= CtrlIMem=0
+	F52= CtrlASIDIn=0
+	F53= CtrlCP0=0
+	F54= CtrlEPCIn=0
+	F55= CtrlExCodeIn=0
+	F56= CtrlIR=0
+	F57= CtrlGPR=0
+
+MEM	F58= PC.Out=>IMem.RAddr
+	F59= CP0.ASID=>IMem.ASID
+	F60= IMem.Out=>IR.In
+	F61= IR.Out31_26=>CU.Op
+	F62= IR.Out5_0=>CU.IRFunc
+	F63= IR.Out15_11=>GPR.WReg
+	F64= PC.Out=>GPR.WData
+	F65= IR.Out25_21=>GPR.RReg1
+	F66= GPR.Rdata1=>PC.In
+	F67= CtrlPC=0
+	F68= CtrlPCInc=0
+	F69= CtrlIMem=0
+	F70= CtrlASIDIn=0
+	F71= CtrlCP0=0
+	F72= CtrlEPCIn=0
+	F73= CtrlExCodeIn=0
+	F74= CtrlIR=0
+	F75= CtrlGPR=0
+
+WB	F76= PC.Out=>IMem.RAddr
+	F77= CP0.ASID=>IMem.ASID
+	F78= IMem.Out=>IR.In
+	F79= IR.Out31_26=>CU.Op
+	F80= IR.Out5_0=>CU.IRFunc
+	F81= IR.Out15_11=>GPR.WReg
+	F82= PC.Out=>GPR.WData
+	F83= IR.Out25_21=>GPR.RReg1
+	F84= GPR.Rdata1=>PC.In
+	F85= CtrlPC=0
+	F86= CtrlPCInc=0
+	F87= CtrlIMem=0
+	F88= CtrlASIDIn=0
+	F89= CtrlCP0=0
+	F90= CtrlEPCIn=0
+	F91= CtrlExCodeIn=0
+	F92= CtrlIR=0
+	F93= CtrlGPR=0
+
+POST	F94= PC[Out]=a
+	F95= GPR[rD]=addr+4
+

@@ -1,0 +1,55 @@
+
+------------------------------------- Proof -------------------------------------
+
+PRE	S0= [PIDReg]=pid                                            Premise(F0)
+	S1= PC[Out]=addr                                            Premise(F1)
+	S2= IMem[{pid,addr}]={31,rT,rA,rB,1068}                     Premise(F2)
+
+IF	S3= PIDReg.Out=pid                                          PIDReg-Out(S0)
+	S4= PC.NIA=addr                                             PC-Out(S1)
+	S5= PIDReg.Out=>IMem.PID                                    Premise(F6)
+	S6= IMem.PID=pid                                            Path(S3,S5)
+	S7= PC.NIA=>IMem.Addr                                       Premise(F7)
+	S8= IMem.Addr=addr                                          Path(S4,S7)
+	S9= IMem.RData={31,rT,rA,rB,1068}                           IMem-Read(S6,S8,S2)
+	S10= IMem.RData=>IR.In                                      Premise(F8)
+	S11= IR.In={31,rT,rA,rB,1068}                               Path(S9,S10)
+	S12= CtrlPC=0                                               Premise(F30)
+	S13= CtrlPCInc=1                                            Premise(F31)
+	S14= PC[Out]=addr+4                                         PC-Inc(S1,S12,S13)
+	S15= CtrlIR=1                                               Premise(F32)
+	S16= [IR]={31,rT,rA,rB,1068}                                IR-Write(S11,S15)
+
+ID	S17= CtrlPC=0                                               Premise(F64)
+	S18= CtrlPCInc=0                                            Premise(F65)
+	S19= PC[Out]=addr+4                                         PC-Hold(S14,S17,S18)
+	S20= CtrlIR=0                                               Premise(F66)
+	S21= [IR]={31,rT,rA,rB,1068}                                IR-Hold(S16,S20)
+
+EX	S22= CtrlPC=0                                               Premise(F98)
+	S23= CtrlPCInc=0                                            Premise(F99)
+	S24= PC[Out]=addr+4                                         PC-Hold(S19,S22,S23)
+	S25= CtrlIR=0                                               Premise(F100)
+	S26= [IR]={31,rT,rA,rB,1068}                                IR-Hold(S21,S25)
+
+MEM	S27= CtrlPC=0                                               Premise(F132)
+	S28= CtrlPCInc=0                                            Premise(F133)
+	S29= PC[Out]=addr+4                                         PC-Hold(S24,S27,S28)
+	S30= CtrlIR=0                                               Premise(F134)
+	S31= [IR]={31,rT,rA,rB,1068}                                IR-Hold(S26,S30)
+
+WB	S32= IR.Out6_10=rT                                          IR-Out(S31)
+	S33= MemDataSel.Out={B4,B3,B2,B1}                           MemDataSel()
+	S34= MemDataSel.Out=>GPRegs.WData                           Premise(F162)
+	S35= GPRegs.WData={B4,B3,B2,B1}                             Path(S33,S34)
+	S36= IR.Out6_10=>GPRegs.WReg                                Premise(F163)
+	S37= GPRegs.WReg=rT                                         Path(S32,S36)
+	S38= CtrlPC=0                                               Premise(F166)
+	S39= CtrlPCInc=0                                            Premise(F167)
+	S40= PC[Out]=addr+4                                         PC-Hold(S29,S38,S39)
+	S41= CtrlGPRegs=1                                           Premise(F169)
+	S42= GPRegs[rT]={B4,B3,B2,B1}                               GPRegs-Write(S37,S35,S41)
+
+POST	S40= PC[Out]=addr+4                                         PC-Hold(S29,S38,S39)
+	S42= GPRegs[rT]={B4,B3,B2,B1}                               GPRegs-Write(S37,S35,S41)
+

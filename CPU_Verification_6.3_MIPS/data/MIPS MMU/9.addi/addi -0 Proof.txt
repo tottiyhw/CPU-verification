@@ -1,0 +1,39 @@
+
+------------------------------------- Proof -------------------------------------
+
+PRE	S0= PC[Out]=addr                                            Premise(F1)
+
+IF	S1= CtrlPC=0                                                Premise(F39)
+	S2= CtrlPCInc=0                                             Premise(F40)
+	S3= PC[Out]=addr                                            PC-Hold(S0,S1,S2)
+
+IMMU	S4= CtrlPC=0                                                Premise(F88)
+	S5= CtrlPCInc=1                                             Premise(F89)
+	S6= PC[Out]=addr+4                                          PC-Inc(S3,S4,S5)
+
+ID	S7= CtrlPC=0                                                Premise(F137)
+	S8= CtrlPCInc=0                                             Premise(F138)
+	S9= PC[Out]=addr+4                                          PC-Hold(S6,S7,S8)
+
+EX	S10= CtrlPC=0                                               Premise(F187)
+	S11= CtrlPCInc=0                                            Premise(F188)
+	S12= PC[Out]=addr+4                                         PC-Hold(S9,S10,S11)
+
+MEM	S13= CtrlPC=0                                               Premise(F236)
+	S14= CtrlPCInc=0                                            Premise(F237)
+	S15= PC[Out]=addr+4                                         PC-Hold(S12,S13,S14)
+
+DMMU1	S16= CtrlPC=0                                               Premise(F285)
+	S17= CtrlPCInc=0                                            Premise(F286)
+	S18= PC[Out]=addr+4                                         PC-Hold(S15,S16,S17)
+
+DMMU2	S19= CtrlPC=0                                               Premise(F334)
+	S20= CtrlPCInc=0                                            Premise(F335)
+	S21= PC[Out]=addr+4                                         PC-Hold(S18,S19,S20)
+
+WB	S22= CtrlPC=0                                               Premise(F383)
+	S23= CtrlPCInc=0                                            Premise(F384)
+	S24= PC[Out]=addr+4                                         PC-Hold(S21,S22,S23)
+
+POST	S24= PC[Out]=addr+4                                         PC-Hold(S21,S22,S23)
+

@@ -1,0 +1,30 @@
+
+------------------------------------- Proof -------------------------------------
+
+/IF	S0= PC[NIA]=addr                                            Premise(F1)
+
+IF	S1= CtrlPC=0                                                Premise(F5508)
+	S2= CtrlPCInc=1                                             Premise(F5509)
+	S3= PC[NIA]=addr+4                                          PC-Write(S0,S1,S2)
+
+ID	S4= PC.NIA=addr+4                                           PC-Out(S3)
+	S5= PC.NIA=>Mux46.1                                         Premise(F10455)
+	S6= Mux46.1=addr+4                                          Path(S4,S5)
+	S7= Mux46.Out=>LR.In                                        Premise(F10456)
+	S8= CtrlLR=1                                                Premise(F11131)
+	S9= CtrlMux46.1=1                                           Premise(F11218)
+	S10= Mux46.Out=addr+4                                       Mux(S6,S9)
+	S11= LR.In=addr+4                                           Path(S10,S7)
+	S12= [LR]=addr+4                                            LR-Write(S11,S8)
+
+EX	S13= CtrlLR=0                                               Premise(F16751)
+	S14= [LR]=addr+4                                            LR-Hold(S12,S13)
+
+MEM	S15= CtrlLR=0                                               Premise(F22371)
+	S16= [LR]=addr+4                                            LR-Hold(S14,S15)
+
+WB	S17= CtrlLR=0                                               Premise(F27991)
+	S18= [LR]=addr+4                                            LR-Hold(S16,S17)
+
+WB/	S18= [LR]=addr+4                                            LR-Hold(S16,S17)
+
